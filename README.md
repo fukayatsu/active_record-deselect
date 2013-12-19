@@ -1,6 +1,6 @@
 # ActiveRecord::Deselect
 
-Adds deselect logic to ActiveRecord
+Adds deselect logic to ActiveRecord.
 
 ## Installation
 
