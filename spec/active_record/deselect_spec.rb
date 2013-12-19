@@ -21,6 +21,7 @@ describe ActiveRecord::Deselect do
 
       context "with String" do
         it { expect(Post.select('id', :name, :body).deselect(:id, :name).select_values).to eq([:body]) }
+        it { expect(Post.select(:id, :name, :body).deselect('id', :name).select_values).to eq([:body]) }
       end
 
       context "with tablename" do
