@@ -1,4 +1,4 @@
-# ActiveRecordDeselect
+# ActiveRecord::Deselect
 
 Adds deselect logic to ActiveRecord
 
@@ -19,17 +19,28 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-Post.column_names
-# => ["id", "name", "body"]
+4.0.2 @ 2.0.0 (main)>Post
+#=> class Post < ActiveRecord::Base {
+              :id => :integer,
+            :name => :string,
+            :body => :text,
+         :user_id => :integer,
+    :published_at => :datetime,
+      :created_at => :datetime,
+      :updated_at => :datetime
+}
 
-Post.select(:id, :name, :body).deselect(:id, :name).select_values
-# => [:body]
+4.0.2 @ 2.0.0 (main)>Post.deselect(:body).to_sql
+#=> "SELECT id, name, user_id, published_at, created_at, updated_at FROM \"posts\""
 
-Post.all.deselect(:id).select_values
-# => [:name, :body]
+4.0.2 @ 2.0.0 (main)>Post.select(:id, :name, :body, :user_id).deselect(:body, "user_id").to_sql
+#=> "SELECT id, name FROM \"posts\""
 
-Post.deselect(:id).select_values
-# => [:name, :body]
+4.0.2 @ 2.0.0 (main)>Post.select('posts.id', 'posts.name').deselect(:name).to_sql
+#=> "SELECT posts.id FROM \"posts\""
+
+4.0.2 @ 2.0.0 (main)>Post.select(:id).deselect(:id).to_sql
+#=> "SELECT \"posts\".* FROM \"posts\""
 ```
 
 ## Contributing
