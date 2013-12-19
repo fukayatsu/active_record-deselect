@@ -1,12 +1,12 @@
 # ActiveRecordDeselect
 
-TODO: Write a gem description
+Adds deselect logic to ActiveRecord
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'active_record_deselect'
+    gem 'active_record-deselect'
 
 And then execute:
 
@@ -14,11 +14,23 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install active_record_deselect
+    $ gem install active_record-deselect
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+Post.column_names
+# => ["id", "name", "body"]
+
+Post.select(:id, :name, :body).deselect(:id, :name).select_values
+# => [:body]
+
+Post.all.deselect(:id).select_values
+# => [:name, :body]
+
+Post.deselect(:id).select_values
+# => [:name, :body]
+```
 
 ## Contributing
 
