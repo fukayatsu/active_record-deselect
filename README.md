@@ -43,6 +43,15 @@ Or install it yourself as:
 #=> "SELECT \"posts\".* FROM \"posts\""
 ```
 
+### deselect!
+
+```ruby
+posts = Post.select(:id, :name)
+posts.deselect!(:name)
+posts.to_sql
+#=> "SELECT id FROM \"posts\""
+```
+
 ## Contributing
 
 1. Fork it

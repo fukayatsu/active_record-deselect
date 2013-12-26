@@ -43,5 +43,21 @@ describe ActiveRecord::Deselect do
     context "with where" do
       it { expect(Post.where(id: 1).deselect(:id).select_values).to eq([:name, :body]) }
     end
+
+    context "chain" do
+      it {
+        posts = Post.select(:id, :name, :body).deselect(:name)
+        posts.deselect(:body) # not deselect!
+        expect(posts.select_values).to eq([:id, :body])
+      }
+    end
+  end
+
+  describe '#deselect!' do
+    it 'deselect name from current scope' do
+      posts = Post.select(:id, :name)
+      posts.deselect!(:name)
+      expect(posts.select_values).to eq([:id])
+    end
   end
 end
