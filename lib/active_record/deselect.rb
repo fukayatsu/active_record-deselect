@@ -31,4 +31,4 @@ module ActiveRecord
   end
 end
 
-ActiveRecord::Querying.send(:include, ActiveRecord::Deselect)
+ActiveRecord::Base.send(:extend, ActiveRecord::Deselect)
